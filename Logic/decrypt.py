@@ -3,7 +3,7 @@ from base64 import b64decode
 import hashlib
 
 class Decrypt:
-    def __init__(self, enc_dict, password):
+    def decrypt(self, enc_dict, password):
         salt = b64decode(enc_dict['salt'])
         cipher_text = b64decode(enc_dict['cipher_text'])
         nonce = b64decode(enc_dict['nonce'])

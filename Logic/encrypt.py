@@ -4,7 +4,7 @@ from base64 import b64encode
 import hashlib
 
 class Encrypt:
-    def __init__(self, plain_text, password):
+    def encrypt(self, plain_text, password):
         salt = get_random_bytes(AES.block_size)
         private_key = hashlib.scrypt(
             password.encode(), salt=salt, n=2**14, r=8, p=1, dklen=32)
