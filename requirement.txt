@@ -2,4 +2,3 @@ pycryptodome
 pillow
 supabase
 python-dotenv
-pysqleet

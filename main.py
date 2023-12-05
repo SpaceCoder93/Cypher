@@ -51,6 +51,40 @@ class LoginScreen(tk.Frame):
         else:
             parent.error_lbl.config(text="Invalid Credentials", fg="red")
 
+class CreateScreen(tk.Frame):
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.image1 = Image.open("assets/loginpage_image.png")
+        self.image1 = self.image1.resize((925, 925), Image.BILINEAR)
+        self.image1 = ImageTk.PhotoImage(self.image1)
+        self.create_widgets(self, parent)
+        self.place(x=0, y=0, relheight=1, relwidth=1)
+
+    def create_widgets(self, parent, root):
+        frame_carousal = tk.Label(parent, bg=ACCENT_COLOR, image=parent.image1)
+        frame_carousal.place(relx=0, rely=0, relwidth=0.6, relheight=1)
+        widget_carousal = tk.Frame(parent, bg=PRIMARY_COLOR)
+        widget_carousal.place(relx=0.6, rely=0, relwidth=0.4, relheight=1)
+        title_lbl = tk.Label(parent, text="CYPHER", font=("Montserrat", 36), width=16, bg=PRIMARY_COLOR, fg=SECONDARY_COLOR)
+        title_lbl.place(relx=0.66, rely=0.25)
+        email_ent = tk.Entry(parent, font=("Montserrat", 28), width=19, bg=PRIMARY_COLOR, fg=SECONDARY_COLOR, bd=10)
+        email_ent.place(relx=0.675, rely=0.35)
+        pass_ent = tk.Entry(parent, font=("Montserrat", 28), width=19, show="*", bg=PRIMARY_COLOR, fg=SECONDARY_COLOR, bd=10)
+        pass_ent.place(relx=0.675, rely=0.45)
+        login_btn = tk.Button(parent, text="Login", font=("Montserrat", 28), width=10, bg=ACCENT_COLOR, fg=SECONDARY_COLOR, bd=10, command=lambda: self.auth(str(email_ent.get()), str(pass_ent.get()), parent, root))
+        login_btn.place(relx=0.735, rely=0.55, relheight=0.09)
+        create_btn = tk.Button(parent, text="New here? Sign up here.", font=("Montserrat", 16), bg=PRIMARY_COLOR, fg=SECONDARY_COLOR, bd=10)
+        create_btn.place(relx=0.7275, rely=0.65)
+        self.error_lbl = tk.Label(parent, text="", fg=PRIMARY_COLOR, bg=PRIMARY_COLOR, bd=0, font=("Montserrat", 28))
+        self.error_lbl.place(relx=0.68, rely=0.75, relwidth=0.25)
+
+    def auth(self, username, passw, parent, root):
+        if username == "viraj" and passw == "1234":
+            parent.forget()
+            MainPage(root)
+        else:
+            parent.error_lbl.config(text="Invalid Credentials", fg="red")
+
 class MainPage(tk.Frame):
     def __init__(self, parent):
         super().__init__(parent)
@@ -59,9 +93,6 @@ class MainPage(tk.Frame):
         self.image1 = ImageTk.PhotoImage(self.image1)
         self.create_widget(self)
         self.place(x=0, y=0, relheight=1, relwidth=1)
-
-    def printer(self, x):
-        print(x)
 
     def create_widget(self, parent):
         title_lbl = tk.Label(parent, text="CYPHER", font=("Montserrat", 36), width=16, bg=PRIMARY_COLOR, fg=ACCENT_COLOR, highlightbackground=ACCENT_COLOR, borderwidth=5, highlightcolor=ACCENT_COLOR, highlightthickness=2)
@@ -100,6 +131,36 @@ class MainPage(tk.Frame):
         list_treeview.place(x=0, y=0, relwidth=0.95, relheight=0.95)
         add_to_btn = tk.Button(list_frame, text="ADD A NEW ENTRY", width=10, bg=PRIMARY_COLOR, fg=SECONDARY_COLOR, bd=2, font=("Montserrat", 15), relief='groove')
         add_to_btn.place(relx=0, rely=0.95, relwidth=1)
+        content_title = tk.Label(content_frame, text="Title", bg=PRIMARY_COLOR, fg=SECONDARY_COLOR, font=("Montserrat", 35))
+        content_title.place(relx='0.01', rely='0.01')
+        content_user = tk.Label(content_frame, text="Username", bg=PRIMARY_COLOR, fg=SECONDARY_COLOR, font=("Montserrat", 25))
+        content_user.place(relx='0.01', rely='0.1')
+        content_user_ent = tk.Entry(content_frame, width=35, bg=PRIMARY_COLOR, fg=SECONDARY_COLOR, font=("Montserrat", 25))
+        content_user_ent.place(relx='0.2', rely='0.1')
+        content_email = tk.Label(content_frame, text="Email", bg=PRIMARY_COLOR, fg=SECONDARY_COLOR, font=("Montserrat", 25))
+        content_email.place(relx='0.01', rely='0.2')
+        content_email_ent = tk.Entry(content_frame, width=35, bg=PRIMARY_COLOR, fg=SECONDARY_COLOR, font=("Montserrat", 25))
+        content_email_ent.place(relx='0.2', rely='0.2')
+        content_pass = tk.Label(content_frame, text="Password", bg=PRIMARY_COLOR, fg=SECONDARY_COLOR, font=("Montserrat", 25))
+        content_pass.place(relx='0.01', rely='0.3')
+        content_pass_ent = tk.Entry(content_frame, width=35, bg=PRIMARY_COLOR, fg=SECONDARY_COLOR, font=("Montserrat", 25))
+        content_pass_ent.place(relx='0.2', rely='0.3')
+        content_url = tk.Label(content_frame, text="URL", bg=PRIMARY_COLOR, fg=SECONDARY_COLOR, font=("Montserrat", 25))
+        content_url.place(relx='0.01', rely='0.4')
+        content_url_ent = tk.Entry(content_frame, width=35, bg=PRIMARY_COLOR, fg=SECONDARY_COLOR, font=("Montserrat", 25))
+        content_url_ent.place(relx='0.2', rely='0.4')
+        show_pass_btn = tk.Button(content_frame, text="Show Password", width=20, bg=PRIMARY_COLOR, fg=SECONDARY_COLOR, bd=2, font=("Montserrat", 15), relief='groove')
+        show_pass_btn.place(relx='0.01', rely='0.5')
+        open_url_btn = tk.Button(content_frame, text="Open URL", width=20, bg=PRIMARY_COLOR, fg=SECONDARY_COLOR, bd=2, font=("Montserrat", 15), relief='groove')
+        open_url_btn.place(relx='0.01', rely='0.6')
+        edit_btn = tk.Button(content_frame, text="Edit", width=20, bg=PRIMARY_COLOR, fg=SECONDARY_COLOR, bd=2, font=("Montserrat", 15), relief='groove')
+        edit_btn.place(relx='0.01', rely='0.7')
+        copy_user_btn = tk.Button(content_frame, text="Copy Username", width=20, bg=PRIMARY_COLOR, fg=SECONDARY_COLOR, bd=2, font=("Montserrat", 15), relief='groove')
+        copy_user_btn.place(relx='0.3', rely='0.5')
+        copy_email_btn = tk.Button(content_frame, text="Copy Email", width=20, bg=PRIMARY_COLOR, fg=SECONDARY_COLOR, bd=2, font=("Montserrat", 15), relief='groove')
+        copy_email_btn.place(relx='0.3', rely='0.6')
+        copy_pass_btn = tk.Button(content_frame, text="Copy Password", width=20, bg=PRIMARY_COLOR, fg=SECONDARY_COLOR, bd=2, font=("Montserrat", 15), relief='groove')
+        copy_pass_btn.place(relx='0.3', rely='0.7')
         self.create_btn(list_treeview)
 
     def create_btn(self, widget):
